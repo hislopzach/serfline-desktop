@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Container, Paper, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import surflineWaves from "./surflineWaves";
+import { SurfChart } from "./SurfChart";
+
+const useStyles = makeStyles((theme) => ({
+  mainPaper: {
+    marginTop: "3em",
+    padding: 10,
+  },
+  chartContainer: {
+    padding: 5,
+  },
+}));
 
 function App() {
+  const classes = useStyles();
+  const synchId = 1;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="lg" className={classes.mainPaper}>
+      <Paper>
+        <Grid container align="center">
+          <Grid item xs={12} className={classes.mainPaper}>
+            <SurfChart surflineResponse={surflineWaves} synchId={synchId} />
+          </Grid>
+        </Grid>
+      </Paper>
+    </Container>
   );
 }
 
