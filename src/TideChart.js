@@ -1,8 +1,8 @@
 import React from "react";
 import {
-  BarChart,
+  AreaChart,
+  Area,
   CartesianGrid,
-  Bar,
   Tooltip,
   XAxis,
   YAxis,
@@ -21,24 +21,23 @@ const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
 
-export const SurfChart = ({ surflineResponse, synchId, ...props }) => {
-  const data = surflineResponse.data.wave
-    .filter((wave, ndx) => ndx % 6 === 0 || ndx < 2)
-    .map((wave) => ({
-      humanTime: formatTime(wave.timestamp),
-      ...wave,
+export const TideChart = ({ surflineResponse, synchId, ...props }) => {
+  const data = surflineResponse.data.tides
+    // .filter((wave, ndx) => ndx % 6 === 0 || ndx < 2)
+    .map((tide) => ({
+      humanTime: formatTime(tide.timestamp),
+      ...tide,
     }));
   return (
     <div style={styles.chartFillIn}>
       <ResponsiveContainer width="100%">
-        <BarChart data={data} synchId={synchId}>
+        <AreaChart data={data} synchId={synchId} baseValue="dataMin">
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="humanTime" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="surf.max" fill="#8884d8" barSize={30} />
-          {/* <Bar dataKey="surf.min" fill="#8884d8" /> */}
-        </BarChart>
+          <Area dataKey="height" fill="#8884d8" barSize={30} />
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );

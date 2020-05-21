@@ -2,7 +2,9 @@ import React from "react";
 import { Container, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import surflineWaves from "./surflineWaves";
+import surflineTides from "./surflineTides";
 import { SurfChart } from "./SurfChart";
+import { TideChart } from "./TideChart";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -23,6 +25,9 @@ function App() {
         <Grid container align="center">
           <Grid item xs={12} className={classes.mainPaper}>
             <SurfChart surflineResponse={surflineWaves} synchId={synchId} />
+          </Grid>
+          <Grid item xs={12} className={classes.mainPaper}>
+            <TideChart surflineResponse={surflineTides} synchId={synchId} />
           </Grid>
         </Grid>
       </Paper>
