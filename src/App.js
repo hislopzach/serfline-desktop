@@ -2,9 +2,12 @@ import React from "react";
 import { Container, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import surflineWaves from "./surflineWaves";
+import surflineWinds from "./surflineWinds";
 import surflineTides from "./surflineTides";
 import { SurfChart } from "./SurfChart";
 import { TideChart } from "./TideChart";
+import { SwellChart } from "./SwellChart";
+import WindChart from "./WindChart";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -18,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const synchId = 1;
+  const synchId = "all";
   return (
     <Container maxWidth="lg" className={classes.mainPaper}>
       <Paper>
@@ -27,7 +30,13 @@ function App() {
             <SurfChart surflineResponse={surflineWaves} synchId={synchId} />
           </Grid>
           <Grid item xs={12} className={classes.mainPaper}>
+            <SwellChart surflineResponse={surflineWaves} synchId={synchId} />
+          </Grid>
+          <Grid item xs={12} className={classes.mainPaper}>
             <TideChart surflineResponse={surflineTides} synchId={synchId} />
+          </Grid>
+          <Grid item xs={12} className={classes.mainPaper}>
+            <WindChart surflineResponse={surflineWinds} synchId={synchId} />
           </Grid>
         </Grid>
       </Paper>
