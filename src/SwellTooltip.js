@@ -1,7 +1,9 @@
 import React from "react";
-import DefaultTooltipContent from "recharts/lib/component/DefaultTooltipContent";
 
 const SwellTooltip = ({ payload, active, ...props }) => {
+  const compareSwells = (s1, s2) => {
+    return s2.value - s1.value;
+  };
   if (!active) {
     // I think returning null works based on this: http://recharts.org/en-US/examples/CustomContentOfTooltip
     return null;
@@ -21,7 +23,10 @@ const SwellTooltip = ({ payload, active, ...props }) => {
         <p style={{ textAlign: "center" }}>
           <strong>{props.label}</strong>
         </p>
-        {payload.map((item, i, payload) => {
+        {payload.sort(compareSwells).map((item, i, payload) => {
+          {
+            /* {payload.map((item, i, payload) => { */
+          }
           return (
             <div key={i} style={tooltip}>
               <p style={{ color: payload[i].color }}>
