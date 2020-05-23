@@ -56,7 +56,6 @@ export const SwellChart = ({ surflineResponse, synchId, ...props }) => {
             stroke={colors.pink}
             strokeWidth={5}
           />
-          {/* <Bar dataKey="surf.min" fill="#8884d8" /> */}
         </LineChart>
       </ResponsiveContainer>
     </div>

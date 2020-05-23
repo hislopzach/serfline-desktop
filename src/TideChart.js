@@ -6,7 +6,6 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import { format, fromUnixTime } from "date-fns";
