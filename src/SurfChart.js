@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { format, fromUnixTime } from "date-fns";
+import colors from "./colors";
 const styles = {
   chartFillIn: {
     height: 250,
@@ -33,11 +34,12 @@ export const SurfChart = ({ surflineResponse, synchId, ...props }) => {
       <ResponsiveContainer width="100%">
         <BarChart data={data} synchId={synchId}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="humanTime" />
+          <XAxis dataKey="humanTime" xAxisId={0} />
+          <XAxis dataKey="humanTime" xAxisId={1} hide />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="surf.max" fill="#8884d8" barSize={30} />
-          {/* <Bar dataKey="surf.min" fill="#8884d8" /> */}
+          <Bar dataKey="surf.max" xAxisId={0} fill={colors.purple} />
+          <Bar dataKey="surf.min" xAxisId={1} fill={colors.green} />
         </BarChart>
       </ResponsiveContainer>
     </div>
