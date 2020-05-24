@@ -1,13 +1,9 @@
 import React from "react";
-import { Container, Paper, Grid } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import surflineWaves from "./surflineWaves";
-import surflineWinds from "./surflineWinds";
-import surflineTides from "./surflineTides";
-import { SurfChart } from "./SurfChart";
-import { TideChart } from "./TideChart";
-import { SwellChart } from "./SwellChart";
-import WindChart from "./WindChart";
+import { ReactQueryConfigProvider } from "react-query";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Spot from "./Spot";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -19,29 +15,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function App() {
+const queryConfig = {
+  throwOnError: false,
+  retry: 1,
+  staleTime: 5 * 60 * 1000,
+  cacheTime: 10 * 60 * 1000,
+};
+
+const App = () => {
   const classes = useStyles();
-  const synchId = "all";
   return (
-    <Container maxWidth="lg" className={classes.mainPaper}>
-      <Paper>
-        <Grid container align="center">
-          <Grid item xs={12} className={classes.mainPaper}>
-            <SurfChart surflineResponse={surflineWaves} synchId={synchId} />
-          </Grid>
-          <Grid item xs={12} className={classes.mainPaper}>
-            <SwellChart surflineResponse={surflineWaves} synchId={synchId} />
-          </Grid>
-          <Grid item xs={12} className={classes.mainPaper}>
-            <TideChart surflineResponse={surflineTides} synchId={synchId} />
-          </Grid>
-          <Grid item xs={12} className={classes.mainPaper}>
-            <WindChart surflineResponse={surflineWinds} synchId={synchId} />
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+    <ReactQueryConfigProvider config={queryConfig}>
+      <Container maxWidth="lg" className={classes.mainPaper}>
+        <Router>
+          <Switch>
+            <Route path="/spot/:spotId" component={Spot} />
+            <Route path="/">
+              <div>Home</div>
+            </Route>
+          </Switch>
+        </Router>
+      </Container>
+    </ReactQueryConfigProvider>
   );
-}
+};
 
 export default App;
