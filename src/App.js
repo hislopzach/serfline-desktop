@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ReactQueryConfigProvider } from "react-query";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Spot from "./Spot";
+import SurflineSearch from "./SurflineSearch";
 import NavBar from "./NavBar";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,12 +29,12 @@ const App = () => {
   return (
     <ReactQueryConfigProvider config={queryConfig}>
       <Container maxWidth="lg" className={classes.mainPaper}>
-        <NavBar />
         <Router>
+          <NavBar />
           <Switch>
             <Route path="/spot/:spotId" component={Spot} />
             <Route path="/">
-              <div>Home</div>
+              <SurflineSearch />
             </Route>
           </Switch>
         </Router>
