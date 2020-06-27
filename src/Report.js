@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { degToCompass } from "./util";
 
 const Report = ({ surflineResponse, ...props }) => {
