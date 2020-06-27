@@ -1,14 +1,6 @@
 import axios from "axios";
 
 const surflineUrl = "https://services.surfline.com";
-export default {
-  getSwells: (spotId) => getSwells(spotId),
-  getTides: (spotId) => getTides(spotId),
-  getWinds: (spotId) => getWinds(spotId),
-  getReport: (spotId) => getReport(spotId),
-  getOverview: (subregionId) => getOverview(subregionId),
-  search: (term) => search(term),
-};
 
 const getSwells = async (spotId) =>
   axios.get(
@@ -30,6 +22,15 @@ const getConditions = async (subregionId) =>
   );
 const search = async (term) =>
   axios.get(`${surflineUrl}/search/site?q=${term}`);
-
 // const getWeathers = (spotId) =>
 //   client.get(`${surflineUrl}/weather?spotId=${spotId}&days=1&intervalHours=12`);
+
+export default {
+  getSwells: (spotId) => getSwells(spotId),
+  getTides: (spotId) => getTides(spotId),
+  getWinds: (spotId) => getWinds(spotId),
+  getReport: (spotId) => getReport(spotId),
+  getOverview: (subregionId) => getOverview(subregionId),
+  search: (term) => search(term),
+  getConditions,
+};

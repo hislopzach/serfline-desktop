@@ -13,7 +13,7 @@ import {
   ListSubheader,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Search, Room, Map } from "@material-ui/icons";
+import { Search, Room } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
 import SurflineAPI from "./surflineAPI";
@@ -37,7 +37,7 @@ const SurflineSearch = ({ ...props }) => {
   };
 
   const [query, setQuery] = useState("");
-  const { data: results, isLoading } = useQuery(["search", query], apiWrapper);
+  const { data: results } = useQuery(["search", query], apiWrapper);
 
   return (
     <Container maxWidth="lg" className={classes.mainPaper}>
