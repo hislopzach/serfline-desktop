@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { format, fromUnixTime } from "date-fns";
-import colors from "./colors";
+import colors from "../colors";
 import SwellTooltip from "./SwellTooltip";
 const styles = {
   chartFillIn: {

@@ -1,4 +1,5 @@
 import React from "react";
+import { degToCompass } from "../util";
 
 const SwellTooltip = ({ payload, active, ...props }) => {
   const compareSwells = (s1, s2) => s2.value - s1.value;
@@ -22,17 +23,21 @@ const SwellTooltip = ({ payload, active, ...props }) => {
         <p style={{ textAlign: "center" }}>
           <strong>{props.label}</strong>
         </p>
-        {payload.sort(compareSwells).map((item, i, payload) => {
-          return (
-            <div key={i} style={tooltip}>
-              <p style={{ color: payload[i].color }}>
-                {`${payload[i].payload.swells[i].height} ft @ ${Math.trunc(
-                  payload[i].payload.swells[i].direction
-                )}° ${payload[i].payload.swells[i].period}s`}
-              </p>
-            </div>
-          );
-        })}
+        {payload
+          .slice()
+          .sort(compareSwells)
+          .map((item, i, payload) => {
+            const { height, direction, period } = payload[i].payload.swells[i];
+            return (
+              <div key={i} style={tooltip}>
+                <p style={{ color: payload[i].color }}>
+                  {`${height} ft @ ${Math.trunc(direction)}° ${degToCompass(
+                    direction
+                  )} ${period}s`}
+                </p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

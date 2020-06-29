@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SurflineAPI from "./surflineAPI";
+import SurflineAPI from "../surflineAPI";
 import { SurfChart } from "./SurfChart";
 import { TideChart } from "./TideChart";
 import { SwellChart } from "./SwellChart";
+import Conditions from "./Conditions";
 import WindChart from "./WindChart";
 import Report from "./Report";
 import ChartPlaceholder from "./ChartPlaceholder";
@@ -22,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const apiWrapper = (key, spotId) => {
-  console.log(key, spotId);
   switch (key) {
     case "swells":
       return SurflineAPI.getSwells(spotId);
@@ -54,6 +54,10 @@ const Spot = (props) => {
     report && ["overview", report.data.spot.subregion._id],
     apiWrapper
   );
+
+  if (report) {
+    document.title = `Lineup | ${report.data.spot.name}`;
+  }
   const { data: conditions } = useQuery(
     report && ["conditions", report.data.spot.subregion._id],
     apiWrapper
@@ -65,7 +69,17 @@ const Spot = (props) => {
         <Grid container align="center">
           <Grid item xs={12} className={classes.mainPaper}>
             {overview ? (
-              <Report surflineResponse={report.data} />
+              <Report report={report.data} overview={overview.data} />
+            ) : (
+              <ChartPlaceholder />
+            )}
+          </Grid>
+          <Grid item xs={12} className={classes.mainPaper}>
+            {conditions ? (
+              <Conditions
+                surflineResponse={conditions.data}
+                synchId={synchId}
+              />
             ) : (
               <ChartPlaceholder />
             )}

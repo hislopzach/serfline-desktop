@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ReactQueryConfigProvider } from "react-query";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Spot from "./Spot";
-import SurflineSearch from "./SurflineSearch";
+import SurflineSearch from "../SurflineSearch";
 import NavBar from "./NavBar";
 
 const useStyles = makeStyles((theme) => ({
