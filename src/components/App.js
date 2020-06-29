@@ -33,9 +33,7 @@ const App = () => {
           <NavBar />
           <Switch>
             <Route path="/spot/:spotId" component={Spot} />
-            <Route path="/">
-              <SurflineSearch />
-            </Route>
+            <Route path="/" component={SurflineSearch} />
           </Switch>
         </Router>
       </Container>
