@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const apiWrapper = (key, spotId) => {
+const apiWrapper = (key, spotId, days) => {
   switch (key) {
     case "swells":
-      return SurflineAPI.getSwells(spotId);
+      return SurflineAPI.getSwells(spotId, days);
     case "winds":
-      return SurflineAPI.getWinds(spotId);
+      return SurflineAPI.getWinds(spotId, days);
     case "tides":
-      return SurflineAPI.getTides(spotId);
+      return SurflineAPI.getTides(spotId, days);
     case "report":
       return SurflineAPI.getReport(spotId);
     case "overview":
@@ -42,14 +42,15 @@ const apiWrapper = (key, spotId) => {
 };
 
 const Spot = (props) => {
+  const days = 3;
   const { spotId } = props.match.params;
   const classes = useStyles();
   const synchId = "all";
 
   const { data: report } = useQuery(["report", spotId], apiWrapper);
-  const { data: swells } = useQuery(["swells", spotId], apiWrapper);
-  const { data: winds } = useQuery(["winds", spotId], apiWrapper);
-  const { data: tides } = useQuery(["tides", spotId], apiWrapper);
+  const { data: swells } = useQuery(["swells", spotId, days], apiWrapper);
+  const { data: winds } = useQuery(["winds", spotId, days], apiWrapper);
+  const { data: tides } = useQuery(["tides", spotId, days], apiWrapper);
   const { data: overview } = useQuery(
     report && ["overview", report.data.spot.subregion._id],
     apiWrapper
@@ -64,58 +65,73 @@ const Spot = (props) => {
   );
 
   return (
-    <Container maxWidth="lg" className={classes.mainPaper}>
-      <Paper>
-        <Grid container align="center">
-          <Grid item xs={12} className={classes.mainPaper}>
-            {overview ? (
-              <Report report={report.data} overview={overview.data} />
-            ) : (
-              <ChartPlaceholder />
-            )}
-          </Grid>
-          <Grid item xs={12} className={classes.mainPaper}>
-            {conditions ? (
-              <Conditions
-                surflineResponse={conditions.data}
-                synchId={synchId}
-              />
-            ) : (
-              <ChartPlaceholder />
-            )}
-          </Grid>
-          <Grid item xs={12} className={classes.mainPaper}>
-            {swells ? (
-              <SurfChart surflineResponse={swells.data} synchId={synchId} />
-            ) : (
-              <ChartPlaceholder />
-            )}
-          </Grid>
-
-          <Grid item xs={12} className={classes.mainPaper}>
-            {swells ? (
-              <SwellChart surflineResponse={swells.data} synchId={synchId} />
-            ) : (
-              <ChartPlaceholder />
-            )}
-          </Grid>
-          <Grid item xs={12} className={classes.mainPaper}>
-            {tides ? (
-              <TideChart surflineResponse={tides.data} synchId={synchId} />
-            ) : (
-              <ChartPlaceholder />
-            )}
-          </Grid>
-          <Grid item xs={12} className={classes.mainPaper}>
-            {winds ? (
-              <WindChart surflineResponse={winds.data} synchId={synchId} />
-            ) : (
-              <ChartPlaceholder />
-            )}
-          </Grid>
+    <Paper>
+      <Grid container align="center">
+        <Grid item xs={12} className={classes.mainPaper}>
+          {overview ? (
+            <Report report={report.data} overview={overview.data} days={days} />
+          ) : (
+            <ChartPlaceholder />
+          )}
         </Grid>
-      </Paper>
-    </Container>
+        <Grid item xs={12} className={classes.mainPaper}>
+          {conditions ? (
+            <Conditions
+              surflineResponse={conditions.data}
+              synchId={synchId}
+              days={days}
+            />
+          ) : (
+            <ChartPlaceholder />
+          )}
+        </Grid>
+        <Grid item xs={12} className={classes.mainPaper}>
+          {swells ? (
+            <SurfChart
+              surflineResponse={swells.data}
+              synchId={synchId}
+              days={days}
+            />
+          ) : (
+            <ChartPlaceholder />
+          )}
+        </Grid>
+
+        <Grid item xs={12} className={classes.mainPaper}>
+          {swells ? (
+            <SwellChart
+              surflineResponse={swells.data}
+              synchId={synchId}
+              days={days}
+            />
+          ) : (
+            <ChartPlaceholder />
+          )}
+        </Grid>
+        <Grid item xs={12} className={classes.mainPaper}>
+          {tides ? (
+            <TideChart
+              surflineResponse={tides.data}
+              synchId={synchId}
+              days={days}
+            />
+          ) : (
+            <ChartPlaceholder />
+          )}
+        </Grid>
+        <Grid item xs={12} className={classes.mainPaper}>
+          {winds ? (
+            <WindChart
+              surflineResponse={winds.data}
+              synchId={synchId}
+              days={days}
+            />
+          ) : (
+            <ChartPlaceholder />
+          )}
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 

@@ -29,7 +29,7 @@ const Report = ({ report, overview, ...props }) => {
         xs={12}
         md={6}
         direction="column"
-        justify="space-around"
+        justify="center"
         alignItems="center"
       >
         <Grid item className={classes.details}>

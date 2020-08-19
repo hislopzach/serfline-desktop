@@ -2,16 +2,18 @@ import axios from "axios";
 
 const surflineUrl = "https://services.surfline.com";
 
-const getSwells = async (spotId) =>
+const getSwells = async (spotId, days = 3) =>
   axios.get(
-    `${surflineUrl}/kbyg/spots/forecasts/wave?spotId=${spotId}&days=6&intervalHours=1`
+    `${surflineUrl}/kbyg/spots/forecasts/wave?spotId=${spotId}&days=${days}&intervalHours=1`
   );
-const getTides = (spotId) =>
+const getTides = (spotId, days = 3) =>
   axios.get(
-    `${surflineUrl}/kbyg/spots/forecasts/tides?spotId=${spotId}&days=6`
+    `${surflineUrl}/kbyg/spots/forecasts/tides?spotId=${spotId}&days=${days}`
   );
-const getWinds = (spotId) =>
-  axios.get(`${surflineUrl}/kbyg/spots/forecasts/wind?spotId=${spotId}&days=6`);
+const getWinds = (spotId, days = 3) =>
+  axios.get(
+    `${surflineUrl}/kbyg/spots/forecasts/wind?spotId=${spotId}&days=${days}`
+  );
 const getReport = async (spotId) =>
   axios.get(`${surflineUrl}/kbyg/spots/reports?spotId=${spotId}`);
 const getOverview = async (subregionId) =>
@@ -26,11 +28,11 @@ const search = async (term) =>
 //   client.get(`${surflineUrl}/weather?spotId=${spotId}&days=1&intervalHours=12`);
 
 export default {
-  getSwells: (spotId) => getSwells(spotId),
-  getTides: (spotId) => getTides(spotId),
-  getWinds: (spotId) => getWinds(spotId),
-  getReport: (spotId) => getReport(spotId),
-  getOverview: (subregionId) => getOverview(subregionId),
-  search: (term) => search(term),
+  getSwells,
+  getTides,
+  getWinds,
+  getReport,
+  getOverview,
+  search,
   getConditions,
 };
