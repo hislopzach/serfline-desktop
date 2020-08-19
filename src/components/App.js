@@ -28,7 +28,7 @@ const App = () => {
   const classes = useStyles();
   return (
     <ReactQueryConfigProvider config={queryConfig}>
-      <Container maxWidth="lg" className={classes.mainPaper}>
+      <Container maxWidth="xl" className={classes.mainPaper}>
         <Router>
           <NavBar />
           <Switch>
