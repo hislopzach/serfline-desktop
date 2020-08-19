@@ -23,25 +23,18 @@ const Report = ({ report, overview, ...props }) => {
       <Grid item xs={12}>
         <Typography variant="h2">{spot.name}</Typography>
       </Grid>
-      <Grid item xs={6} className={classes.highlights}>
-        <strong>Highlights:</strong>
-        <ul>
-          {forecastSummary.highlights.map((highlight) => (
-            <li>{highlight}</li>
-          ))}
-        </ul>
-      </Grid>
       <Grid
         container
         item
-        xs={6}
+        xs={12}
+        md={6}
         direction="column"
         justify="space-around"
         alignItems="center"
       >
         <Grid item className={classes.details}>
           Tide: {forecast.tide.current.height} ft{" "}
-          {forecast.tide.next.type === "LOW" ? "Falling" : "Rising"}
+          {forecast.tide.next.type === "LOW" ? "falling" : "rising"}
         </Grid>
         <Grid item>
           Wind: {forecast.wind.speed}kts {degToCompass(forecast.wind.direction)}
@@ -49,6 +42,14 @@ const Report = ({ report, overview, ...props }) => {
         <Grid item>
           Surf Height: {forecast.waveHeight.min}-{forecast.waveHeight.max} ft
         </Grid>
+      </Grid>
+      <Grid item xs={12} md={6} className={classes.highlights}>
+        <strong>Highlights:</strong>
+        <ul>
+          {forecastSummary.highlights.map((highlight, ndx) => (
+            <li key={ndx}>{highlight}</li>
+          ))}
+        </ul>
       </Grid>
     </Grid>
   );
