@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { format, fromUnixTime } from "date-fns";
+import { degToCompass } from "../util";
 import colors from "../colors";
 const styles = {
   chartFillIn: {
@@ -35,7 +36,12 @@ const WindChart = ({ surflineResponse, synchId, ...props }) => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="humanTime" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, props) => [
+              `${degToCompass(props.payload.direction)}`,
+              `${value.toPrecision(1)} kts`,
+            ]}
+          />
           <Line dataKey="speed" stroke={colors.blue} strokeWidth={5} />
         </LineChart>
       </ResponsiveContainer>
