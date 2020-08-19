@@ -22,9 +22,9 @@ const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
 
-export const SwellChart = ({ surflineResponse, synchId, ...props }) => {
+export const SwellChart = ({ surflineResponse, synchId, days, ...props }) => {
   const data = surflineResponse.data.wave
-    .filter((wave, ndx) => ndx % 6 === 0)
+    .filter((wave, ndx) => ndx % days === 0)
     .map((wave) => ({
       humanTime: formatTime(wave.timestamp),
       ...wave,

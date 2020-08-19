@@ -20,9 +20,10 @@ const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
 
-export const TideChart = ({ surflineResponse, synchId, ...props }) => {
+export const TideChart = ({ surflineResponse, synchId, days, ...props }) => {
+  const numToTruncate = days >= 5 ? days + 1 : days;
   const data = surflineResponse.data.tides
-    .slice(0, surflineResponse.data.tides.length - 7)
+    .slice(0, surflineResponse.data.tides.length - numToTruncate)
     // .filter((wave, ndx) => ndx % 6 === 0 )
     .map((tide) => ({
       humanTime: formatTime(tide.timestamp),

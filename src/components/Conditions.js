@@ -7,10 +7,11 @@ const Conditions = ({ surflineResponse, days, ...props }) => {
     data: { conditions },
     associated,
   } = surflineResponse;
+  const firstRowEnd = days < 3 ? days : 3;
   return (
     <>
       <Grid container justify="center" spacing={4}>
-        {conditions.slice(0, days).map((condition) => (
+        {conditions.slice(0, firstRowEnd).map((condition) => (
           <ConditionCard
             key={condition.timestamp}
             condition={condition}

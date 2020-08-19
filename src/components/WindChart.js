@@ -22,9 +22,9 @@ const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
 
-const WindChart = ({ surflineResponse, synchId, ...props }) => {
+const WindChart = ({ surflineResponse, synchId, days, ...props }) => {
   const data = surflineResponse.data.wind
-    .filter((wind, ndx) => ndx % 6 === 0)
+    .filter((wind, ndx) => ndx % days === 0)
     .map((wind) => ({
       humanTime: formatTime(wind.timestamp),
       ...wind,
