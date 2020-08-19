@@ -61,7 +61,7 @@ const Spot = (props) => {
   };
 
   if (report) {
-    document.title = `Lineup | ${report.data.spot.name}`;
+    document.title = `Serfline | ${report.data.spot.name}`;
   }
   const { data: conditions } = useQuery(
     report && ["conditions", report.data.spot.subregion._id],

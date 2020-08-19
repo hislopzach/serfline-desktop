@@ -19,7 +19,7 @@ const NavBar = () => {
       <Toolbar>
         <Link to="/" className={classes.link}>
           <Typography variant="h5" className={classes.button}>
-            Lineup
+            Serfline
           </Typography>
         </Link>
       </Toolbar>

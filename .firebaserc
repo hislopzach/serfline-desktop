@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "lineup-c469f"
+    "default": "lineup-c469f",
+    "prod": "serf-line"
   }
 }
