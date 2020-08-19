@@ -40,7 +40,6 @@ export const SwellChart = ({ surflineResponse, synchId, days, ...props }) => {
             cursor={{ fill: "rgba(206, 206, 206, 0.2)" }}
             content={SwellTooltip}
           />
-          {/* <Tooltip /> */}
           <Line
             dataKey="swells[0].height"
             stroke={colors.blue}
