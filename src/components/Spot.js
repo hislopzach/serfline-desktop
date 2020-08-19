@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Paper, Grid } from "@material-ui/core";
+import React, { useState } from "react";
+import { Paper, Grid, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SurflineAPI from "../surflineAPI";
 import { SurfChart } from "./SurfChart";
@@ -14,7 +14,7 @@ import { useQuery } from "react-query";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
-    marginTop: "3em",
+    marginTop: 10,
     padding: 10,
   },
   chartContainer: {
@@ -42,7 +42,7 @@ const apiWrapper = (key, spotId, days) => {
 };
 
 const Spot = (props) => {
-  const days = 3;
+  const [days, setDays] = useState(3);
   const { spotId } = props.match.params;
   const classes = useStyles();
   const synchId = "all";
@@ -55,6 +55,10 @@ const Spot = (props) => {
     report && ["overview", report.data.spot.subregion._id],
     apiWrapper
   );
+
+  const handleDaysChange = (event) => {
+    setDays(event.target.value);
+  };
 
   if (report) {
     document.title = `Lineup | ${report.data.spot.name}`;
@@ -73,6 +77,21 @@ const Spot = (props) => {
           ) : (
             <ChartPlaceholder />
           )}
+        </Grid>
+        <Grid item xs={12}>
+          <InputLabel id="days-label">Days to Show</InputLabel>
+          <Select
+            labelId="days-label"
+            value={days}
+            onChange={handleDaysChange}
+            className={classes.selectEmpty}
+          >
+            {[1, 2, 3, 4, 5, 6].map((value, ndx) => (
+              <MenuItem key={ndx} value={value}>
+                {value}
+              </MenuItem>
+            ))}
+          </Select>
         </Grid>
         <Grid item xs={12} className={classes.mainPaper}>
           {conditions ? (
