@@ -23,7 +23,7 @@ const formatTime = (timestamp) => {
 
 const WindChart = ({ surflineResponse, synchId, ...props }) => {
   const data = surflineResponse.data.wind
-    .filter((wind, ndx) => ndx % 6 === 0 || ndx < 2)
+    .filter((wind, ndx) => ndx % 6 === 0)
     .map((wind) => ({
       humanTime: formatTime(wind.timestamp),
       ...wind,

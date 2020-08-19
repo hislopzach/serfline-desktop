@@ -22,7 +22,8 @@ const formatTime = (timestamp) => {
 
 export const TideChart = ({ surflineResponse, synchId, ...props }) => {
   const data = surflineResponse.data.tides
-    // .filter((wave, ndx) => ndx % 6 === 0 || ndx < 2)
+    .slice(0, surflineResponse.data.tides.length - 7)
+    // .filter((wave, ndx) => ndx % 6 === 0 )
     .map((tide) => ({
       humanTime: formatTime(tide.timestamp),
       ...tide,

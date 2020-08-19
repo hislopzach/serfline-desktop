@@ -24,7 +24,7 @@ const formatTime = (timestamp) => {
 
 export const SwellChart = ({ surflineResponse, synchId, ...props }) => {
   const data = surflineResponse.data.wave
-    .filter((wave, ndx) => ndx % 6 === 0 || ndx < 2)
+    .filter((wave, ndx) => ndx % 6 === 0)
     .map((wave) => ({
       humanTime: formatTime(wave.timestamp),
       ...wave,
