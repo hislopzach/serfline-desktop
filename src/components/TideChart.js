@@ -20,7 +20,7 @@ const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
 
-export const TideChart = ({ surflineResponse, synchId, days, ...props }) => {
+export const TideChart = ({ surflineResponse, days, ...props }) => {
   const numToTruncate = days >= 5 ? days + 1 : days;
   const data = surflineResponse.data.tides
     .slice(0, surflineResponse.data.tides.length - numToTruncate)
@@ -32,7 +32,7 @@ export const TideChart = ({ surflineResponse, synchId, days, ...props }) => {
   return (
     <div style={styles.chartFillIn}>
       <ResponsiveContainer width="100%">
-        <AreaChart data={data} synchId={synchId} baseValue="dataMin">
+        <AreaChart data={data} baseValue="dataMin">
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="humanTime" />
           <YAxis />

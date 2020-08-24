@@ -45,7 +45,7 @@ const Spot = (props) => {
   const [days, setDays] = useState(3);
   const { spotId } = props.match.params;
   const classes = useStyles();
-  const synchId = "all";
+  const syncId = "anyId";
 
   const { data: report } = useQuery(["report", spotId], apiWrapper);
   const { data: swells } = useQuery(["swells", spotId, days], apiWrapper);
@@ -99,11 +99,7 @@ const Spot = (props) => {
         </Grid>
         <Grid item xs={12} className={classes.mainPaper}>
           {conditions ? (
-            <Conditions
-              surflineResponse={conditions.data}
-              synchId={synchId}
-              days={days}
-            />
+            <Conditions surflineResponse={conditions.data} days={days} />
           ) : (
             <ChartPlaceholder />
           )}
@@ -112,7 +108,7 @@ const Spot = (props) => {
           {swells ? (
             <SurfChart
               surflineResponse={swells.data}
-              synchId={synchId}
+              syncId={syncId}
               days={days}
             />
           ) : (
@@ -124,7 +120,19 @@ const Spot = (props) => {
           {swells ? (
             <SwellChart
               surflineResponse={swells.data}
-              synchId={synchId}
+              syncId={syncId}
+              days={days}
+            />
+          ) : (
+            <ChartPlaceholder />
+          )}
+        </Grid>
+
+        <Grid item xs={12} className={classes.mainPaper}>
+          {winds ? (
+            <WindChart
+              surflineResponse={winds.data}
+              syncId={syncId}
               days={days}
             />
           ) : (
@@ -135,18 +143,7 @@ const Spot = (props) => {
           {tides ? (
             <TideChart
               surflineResponse={tides.data}
-              synchId={synchId}
-              days={days}
-            />
-          ) : (
-            <ChartPlaceholder />
-          )}
-        </Grid>
-        <Grid item xs={12} className={classes.mainPaper}>
-          {winds ? (
-            <WindChart
-              surflineResponse={winds.data}
-              synchId={synchId}
+              syncId={syncId}
               days={days}
             />
           ) : (

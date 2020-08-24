@@ -1,12 +1,12 @@
 import React from "react";
 import {
-  LineChart,
   CartesianGrid,
   Line,
   Tooltip,
   XAxis,
   YAxis,
   ResponsiveContainer,
+  ComposedChart,
 } from "recharts";
 import { format, fromUnixTime } from "date-fns";
 import { degToCompass } from "../util";
@@ -22,7 +22,7 @@ const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
 
-const WindChart = ({ surflineResponse, synchId, days, ...props }) => {
+const WindChart = ({ surflineResponse, syncId, days, ...props }) => {
   const data = surflineResponse.data.wind
     .filter((wind, ndx) => ndx % days === 0)
     .map((wind) => ({
@@ -32,7 +32,7 @@ const WindChart = ({ surflineResponse, synchId, days, ...props }) => {
   return (
     <div style={styles.chartFillIn}>
       <ResponsiveContainer width="100%">
-        <LineChart data={data} synchId={synchId}>
+        <ComposedChart data={data} syncId={syncId}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="humanTime" />
           <YAxis />
@@ -43,7 +43,7 @@ const WindChart = ({ surflineResponse, synchId, days, ...props }) => {
             ]}
           />
           <Line dataKey="speed" stroke={colors.blue} strokeWidth={5} />
-        </LineChart>
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   );

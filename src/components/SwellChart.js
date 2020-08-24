@@ -1,12 +1,12 @@
 import React from "react";
 import {
-  LineChart,
   CartesianGrid,
   Line,
   Tooltip,
   XAxis,
   YAxis,
   ResponsiveContainer,
+  ComposedChart,
 } from "recharts";
 import { format, fromUnixTime } from "date-fns";
 import colors from "../colors";
@@ -22,7 +22,7 @@ const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
 
-export const SwellChart = ({ surflineResponse, synchId, days, ...props }) => {
+export const SwellChart = ({ surflineResponse, syncId, days, ...props }) => {
   const data = surflineResponse.data.wave
     .filter((wave, ndx) => ndx % days === 0)
     .map((wave) => ({
@@ -32,7 +32,7 @@ export const SwellChart = ({ surflineResponse, synchId, days, ...props }) => {
   return (
     <div style={styles.chartFillIn}>
       <ResponsiveContainer width="100%">
-        <LineChart data={data} synchId={synchId}>
+        <ComposedChart data={data} syncId={syncId}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="humanTime" />
           <YAxis />
@@ -55,7 +55,7 @@ export const SwellChart = ({ surflineResponse, synchId, days, ...props }) => {
             stroke={colors.pink}
             strokeWidth={5}
           />
-        </LineChart>
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   );
