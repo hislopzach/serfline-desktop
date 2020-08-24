@@ -73,7 +73,11 @@ const Spot = (props) => {
       <Grid container align="center">
         <Grid item xs={12} className={classes.mainPaper}>
           {overview ? (
-            <Report report={report.data} overview={overview.data} days={days} />
+            <Report
+              reportData={report.data}
+              overview={overview.data}
+              days={days}
+            />
           ) : (
             <ChartPlaceholder />
           )}

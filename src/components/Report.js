@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Report = ({ report, overview, ...props }) => {
+const Report = ({ reportData, overview, ...props }) => {
   const classes = useStyles();
-  const { spot, forecast } = report;
+  const { spot, forecast, report } = reportData;
   const {
     data: { forecastSummary },
   } = overview;
@@ -50,6 +50,9 @@ const Report = ({ report, overview, ...props }) => {
             <li key={ndx}>{highlight}</li>
           ))}
         </ul>
+      </Grid>
+      <Grid item xs={12} md={6} className={classes.highlights}>
+        <div dangerouslySetInnerHTML={{ __html: report?.body }}></div>
       </Grid>
     </Grid>
   );
