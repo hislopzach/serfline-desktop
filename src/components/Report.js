@@ -58,9 +58,11 @@ const Report = ({ reportData, overview, ...props }) => {
         <strong>Cam Links:</strong>
         <div>
           <ul>
-            {spot.cameras.map((cam, ndx) => (
-              <li>{cam.streamUrl}</li>
-            ))}
+            {spot.cameras?.length ? (
+              spot.cameras.map((cam, ndx) => <li>{cam.streamUrl}</li>)
+            ) : (
+              <>No cameras available</>
+            )}
           </ul>
         </div>
       </Grid>
