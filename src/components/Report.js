@@ -54,6 +54,16 @@ const Report = ({ reportData, overview, ...props }) => {
       <Grid item xs={12} md={6} className={classes.highlights}>
         <div dangerouslySetInnerHTML={{ __html: report?.body }}></div>
       </Grid>
+      <Grid>
+        <strong>Cam Links:</strong>
+        <div>
+          <ul>
+            {spot.cameras.map((cam, ndx) => (
+              <li>{cam.streamUrl}</li>
+            ))}
+          </ul>
+        </div>
+      </Grid>
     </Grid>
   );
 };
