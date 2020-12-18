@@ -39,7 +39,7 @@ const WindChart = ({ surflineResponse, syncId, days, ...props }) => {
           <Tooltip
             formatter={(value, name, props) => [
               `${degToCompass(props.payload.direction)}`,
-              `${value.toPrecision(1)} kts`,
+              `${Math.round(value)} kts`,
             ]}
           />
           <Line dataKey="speed" stroke={colors.blue} strokeWidth={5} />
