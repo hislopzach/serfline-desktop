@@ -23,7 +23,7 @@ const getConditions = async (subregionId) =>
     `${surflineUrl}/kbyg/regions/forecasts/conditions?subregionId=${subregionId}`
   );
 const search = async (term) =>
-  axios.get(`${surflineUrl}/search/site?q=${term}`);
+  axios.get(`${surflineUrl}/search/site?q=${term}&querySize=10`);
 // const getWeathers = (spotId) =>
 //   client.get(`${surflineUrl}/weather?spotId=${spotId}&days=1&intervalHours=12`);
 
