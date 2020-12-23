@@ -31,22 +31,22 @@ const ConditionCard = ({ condition, associated }) => {
             item
             xs={6}
             style={{
-              backgroundColor: conditionToColor(condition.am.rating),
+              backgroundColor: conditionToColor(condition?.am?.rating),
             }}
           >
             <Typography variant="body2">
-              {condition.am.rating.split("_").join(" ")}
+              {condition?.am?.rating?.split("_")?.join(" ") || "Unknown"}
             </Typography>
           </Grid>
           <Grid
             item
             xs={6}
             style={{
-              backgroundColor: conditionToColor(condition.pm.rating),
+              backgroundColor: conditionToColor(condition?.pm?.rating),
             }}
           >
             <Typography variant="body2">
-              {condition.pm.rating.split("_").join(" ")}
+              {condition?.pm?.rating?.split("_")?.join(" ") || "Unknown"}
             </Typography>
           </Grid>
         </Grid>
