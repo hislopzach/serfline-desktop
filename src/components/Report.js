@@ -40,7 +40,11 @@ const Report = ({ reportData, overview, ...props }) => {
           Wind: {forecast.wind.speed}kts {degToCompass(forecast.wind.direction)}
         </Grid>
         <Grid item>
-          Surf Height: {forecast.waveHeight.min}-{forecast.waveHeight.max} ft
+          Surf Height: {forecast.waveHeight.min}-{forecast.waveHeight.max} ft (
+          {forecast.waveHeight.humanRelation})
+        </Grid>
+        <Grid item>
+          Water Temp: {forecast.waterTemp.min}°-{forecast.waterTemp.max}°
         </Grid>
       </Grid>
       <Grid item xs={12} md={6} className={classes.highlights}>
