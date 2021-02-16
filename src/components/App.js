@@ -9,9 +9,10 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
-  mainPaper: {
+  mainContainer: {
     marginTop: "3em",
     padding: 10,
+    minHeight: "90vh",
   },
   chartContainer: {
     padding: 5,
@@ -29,7 +30,7 @@ const App = () => {
   const classes = useStyles();
   return (
     <ReactQueryConfigProvider config={queryConfig}>
-      <Container maxWidth="lg" className={classes.mainPaper}>
+      <Container maxWidth="lg" className={classes.mainContainer}>
         <Router>
           <NavBar />
           <Switch>

@@ -7,9 +7,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   container: {
-    marginTop: "2em",
-    position: "fixed",
-    bottom: 0,
+    padding: "1em",
+    width: "100%",
+    textAlign: "center",
   },
 }));
 
