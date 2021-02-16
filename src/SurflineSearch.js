@@ -49,7 +49,7 @@ const SurflineSearch = ({ ...props }) => {
               onChange={(e) => {
                 setQuery(e.target.value);
               }}
-              placeholder="Search for a Spot or Region"
+              placeholder="Search for a Spot"
               variant="outlined"
               InputProps={{
                 startAdornment: (
