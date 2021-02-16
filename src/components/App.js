@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Spot from "./Spot";
 import SurflineSearch from "../SurflineSearch";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/" component={SurflineSearch} />
           </Switch>
         </Router>
+        <Footer />
       </Container>
     </ReactQueryConfigProvider>
   );
