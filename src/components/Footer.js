@@ -3,8 +3,13 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   copyright: {
-    color: "#838687",
+    color: "white",
     textAlign: "center",
+  },
+  container: {
+    marginTop: "2em",
+    position: "fixed",
+    bottom: 0,
   },
 }));
 

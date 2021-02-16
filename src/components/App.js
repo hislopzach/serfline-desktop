@@ -39,6 +39,7 @@ const App = () => {
         </Router>
         <Footer />
       </Container>
+      <Footer />
     </ReactQueryConfigProvider>
   );
 };
