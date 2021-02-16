@@ -4,8 +4,6 @@ import {
   List,
   ListItem,
   TextField,
-  Container,
-  Paper,
   Grid,
   InputAdornment,
   ListItemIcon,
@@ -37,66 +35,50 @@ const SurflineSearch = ({ ...props }) => {
   };
 
   const [query, setQuery] = useState("");
+  const [expand, setExpand] = useState(false);
   const { data: results } = useQuery(["search", query], apiWrapper);
 
   return (
-    <Container maxWidth="lg" className={classes.mainPaper}>
-      <Paper>
-        <Grid container>
-          <Grid item xs={12}>
-            <TextField
-              className={classes.searchBar}
-              onChange={(e) => {
-                setQuery(e.target.value);
-              }}
-              placeholder="Search for a Spot"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            {results && query && (
-              <List>
-                <ListSubheader>Surf Spots</ListSubheader>
-                {results.data[0].hits.hits.map((spot) => (
-                  <ListItem
-                    button
-                    key={spot._id}
-                    to={`/spot/${spot._id}`}
-                    component={Link}
-                  >
-                    <ListItemIcon>
-                      <Room />
-                    </ListItemIcon>
-                    <ListItemText>{spot._source.name}</ListItemText>
-                  </ListItem>
-                ))}
-                {/* <ListSubheader>Regions</ListSubheader>
-                {results.data[1].hits.hits.map((spot) => (
-                  <ListItem
-                    button
-                    key={spot._id}
-                    to={`/spot/${spot._id}`}
-                    component={Link}
-                  >
-                    <ListItemIcon>
-                      <Map />
-                    </ListItemIcon>
-                    <ListItemText>{spot._source.name}</ListItemText>
-                  </ListItem>
-                ))} */}
-              </List>
-            )}
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+    <Grid container>
+      <Grid item xs={12}>
+        <TextField
+          onClick={() => setExpand(true)}
+          className={classes.searchBar}
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
+          placeholder="Search for a Spot (ex: Pipeline)"
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        {results && query && expand && (
+          <List>
+            <ListSubheader>Surf Spots</ListSubheader>
+            {results.data[0].hits.hits.map((spot) => (
+              <ListItem
+                button
+                key={spot._id}
+                to={`/spot/${spot._id}`}
+                component={Link}
+              >
+                <ListItemIcon>
+                  <Room />
+                </ListItemIcon>
+                <ListItemText>{spot._source.name}</ListItemText>
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Grid>
+    </Grid>
   );
 };
 
