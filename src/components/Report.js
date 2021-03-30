@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { degToCompass } from "../util";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   details: {
@@ -63,7 +64,18 @@ const Report = ({ reportData, overview, ...props }) => {
         <div>
           <ul>
             {spot.cameras?.length ? (
-              spot.cameras.map((cam, ndx) => <li>{cam.streamUrl}</li>)
+              spot.cameras.map((cam, ndx) => (
+                <li>
+                  <Link
+                    to={{
+                      pathname: "/stream",
+                      search: `?streamUrl=${cam.streamUrl}`,
+                    }}
+                  >
+                    {cam.title}
+                  </Link>
+                </li>
+              ))
             ) : (
               <>No cameras available</>
             )}
