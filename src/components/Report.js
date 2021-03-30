@@ -1,5 +1,13 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import VideocamIcon from "@material-ui/icons/Videocam";
+import {
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { degToCompass } from "../util";
 import { Link } from "react-router-dom";
@@ -62,24 +70,27 @@ const Report = ({ reportData, overview, ...props }) => {
       <Grid>
         <strong>Cam Links:</strong>
         <div>
-          <ul>
+          <List component="nav">
             {spot.cameras?.length ? (
               spot.cameras.map((cam, ndx) => (
-                <li>
-                  <Link
-                    to={{
-                      pathname: "/stream",
-                      search: `?streamUrl=${cam.streamUrl}`,
-                    }}
-                  >
-                    {cam.title}
-                  </Link>
-                </li>
+                <ListItem
+                  button
+                  component={Link}
+                  to={{
+                    pathname: "/stream",
+                    search: `?streamUrl=${cam.streamUrl}`,
+                  }}
+                >
+                  <ListItemIcon>
+                    <VideocamIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={cam.title} />
+                </ListItem>
               ))
             ) : (
               <>No cameras available</>
             )}
-          </ul>
+          </List>
         </div>
       </Grid>
     </Grid>
