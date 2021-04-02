@@ -1,5 +1,7 @@
 import React from "react";
 import VideocamIcon from "@material-ui/icons/Videocam";
+import VideocamOffIcon from "@material-ui/icons/VideocamOff";
+import TheatersIcon from "@material-ui/icons/Theaters";
 import {
   Grid,
   List,
@@ -67,22 +69,49 @@ const Report = ({ reportData, overview, ...props }) => {
       <Grid item xs={12} md={6} className={classes.highlights}>
         <div dangerouslySetInnerHTML={{ __html: report?.body }}></div>
       </Grid>
-      <Grid>
+      <Grid item>
         <strong>Cam Links:</strong>
         <div>
           <List component="nav">
             {spot.cameras?.length ? (
-              spot.cameras.map((cam, ndx) => (
+              spot.cameras?.map((cam, ndx) => (
                 <ListItem
                   button
                   component={Link}
+                  disabled={cam.status.isDown}
                   to={{
                     pathname: "/stream",
                     search: `?streamUrl=${cam.streamUrl}`,
                   }}
                 >
                   <ListItemIcon>
-                    <VideocamIcon />
+                    {cam.status.isDown ? <VideocamOffIcon /> : <VideocamIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={cam.title} />
+                </ListItem>
+              ))
+            ) : (
+              <>No cameras available</>
+            )}
+          </List>
+        </div>
+      </Grid>
+      <Grid item>
+        <strong>Rewind Links:</strong>
+        <div>
+          <List component="nav">
+            {spot.cameras?.length ? (
+              spot.cameras?.map((cam, ndx) => (
+                <ListItem
+                  button
+                  component={Link}
+                  to={{
+                    pathname: "/stream",
+                    search: `?streamUrl=${cam.rewindClip}`,
+                  }}
+                >
+                  <ListItemIcon>
+                    <TheatersIcon />
                   </ListItemIcon>
                   <ListItemText primary={cam.title} />
                 </ListItem>
