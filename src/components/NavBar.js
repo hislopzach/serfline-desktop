@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
-  mainPaper: {
-    marginTop: "3em",
+  container: {
+    marginTop: "1em",
     padding: 10,
   },
   search: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
-      width: "auto",
+      width: "100%",
     },
   },
   searchIcon: {
@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
+  },
+  backdrop: {
+    zIndex: 1500,
   },
 }));
 
@@ -108,13 +111,17 @@ const NavBar = () => {
             />
           </div>
         </Toolbar>
-        <MyBackdrop open={open} onClick={handleClose}>
+        <MyBackdrop
+          open={open}
+          onClick={handleClose}
+          className={classes.backdrop}
+        >
           <Container
             maxWidth="md"
-            className={classes.mainPaper}
+            className={classes.container}
             onClick={(event) => event.stopPropagation()}
           >
-            <Paper elevation={0} className={classes.mainPaper}>
+            <Paper elevation={0}>
               <IconButton onClick={handleClose}>
                 <CloseIcon />
               </IconButton>
