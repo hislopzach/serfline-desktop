@@ -69,6 +69,11 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: 1500,
   },
+  closeButton: {
+    position: "absolute",
+    left: "94%",
+    color: "white",
+  },
 }));
 
 const MyBackdrop = withStyles({
@@ -122,9 +127,14 @@ const NavBar = () => {
             onClick={(event) => event.stopPropagation()}
           >
             <Paper elevation={0}>
-              <IconButton onClick={handleClose}>
+              {/* <IconButton
+                onClick={handleClose}
+                className={classes.closeButton}
+                color="primary"
+                size="medium"
+              >
                 <CloseIcon />
-              </IconButton>
+              </IconButton> */}
               {open && <SurflineSearch closeBackdrop={handleClose} />}
             </Paper>
           </Container>
