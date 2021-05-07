@@ -22,6 +22,7 @@ const getConditions = async (subregionId) =>
   axios.get(
     `${surflineUrl}/kbyg/regions/forecasts/conditions?subregionId=${subregionId}`
   );
+const getFeaturedCam = async () => axios.get(`${surflineUrl}/kbyg/cotm`);
 const search = async (term) =>
   axios.get(`${surflineUrl}/search/site?q=${term}&querySize=10`);
 // const getWeathers = (spotId) =>
@@ -35,4 +36,5 @@ export default {
   getOverview,
   search,
   getConditions,
+  getFeaturedCam,
 };
