@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   gridContainer: {
     // minWidth: "100%",
+    padding: theme.spacing(2),
   },
 }));
 
@@ -48,7 +49,7 @@ const SurflineSearch = ({ closeBackdrop, ...props }) => {
     searchInputRef.current.focus();
   }, []);
   return (
-    <Grid container className={classes.gridContainer}>
+    <Grid container className={classes.gridContainer} justify="center">
       <Grid item xs={12}>
         <TextField
           inputRef={searchInputRef}
