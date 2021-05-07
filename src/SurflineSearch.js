@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import {
   List,
@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Search, Room } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import SurflineAPI from "./surflineAPI";
 
@@ -25,24 +25,33 @@ const useStyles = makeStyles((theme) => ({
   searchBar: {
     width: "100%",
   },
+  gridContainer: {
+    // minWidth: "100%",
+  },
 }));
 
-const SurflineSearch = ({ ...props }) => {
+const SurflineSearch = ({ closeBackdrop, ...props }) => {
   const classes = useStyles();
-
+  let history = useHistory();
   const apiWrapper = async (key, query) => {
     return await SurflineAPI.search(query);
   };
-
+  const searchInputRef = useRef(null);
   const [query, setQuery] = useState("");
-  const [expand, setExpand] = useState(false);
   const { data: results } = useQuery(["search", query], apiWrapper);
-
+  const resultClick = (url) => {
+    closeBackdrop();
+    history.push(url);
+    searchInputRef.current.blur();
+  };
+  useEffect(() => {
+    searchInputRef.current.focus();
+  }, []);
   return (
-    <Grid container>
+    <Grid container className={classes.gridContainer}>
       <Grid item xs={12}>
         <TextField
-          onClick={() => setExpand(true)}
+          inputRef={searchInputRef}
           className={classes.searchBar}
           onChange={(e) => {
             setQuery(e.target.value);
@@ -59,7 +68,30 @@ const SurflineSearch = ({ ...props }) => {
         />
       </Grid>
       <Grid item xs={12}>
-        {results && query && expand && (
+        <List>
+          {results?.data[0]?.hits?.hits?.length ? (
+            <>
+              <ListSubheader>Surf Spots</ListSubheader>
+              {results.data[0].hits.hits.map((spot) => (
+                <ListItem
+                  button
+                  key={spot._id}
+                  to={`/spot/${spot._id}`}
+                  component={Link}
+                  onClick={() => resultClick(`/spot/${spot._id}`)}
+                >
+                  <ListItemIcon>
+                    <Room />
+                  </ListItemIcon>
+                  <ListItemText>{spot._source.name}</ListItemText>
+                </ListItem>
+              ))}
+            </>
+          ) : (
+            <ListItem>No results</ListItem>
+          )}
+        </List>
+        {/* {results && query && expand && (
           <List>
             <ListSubheader>Surf Spots</ListSubheader>
             {results.data[0].hits.hits.map((spot) => (
@@ -76,7 +108,7 @@ const SurflineSearch = ({ ...props }) => {
               </ListItem>
             ))}
           </List>
-        )}
+        )} */}
       </Grid>
     </Grid>
   );
