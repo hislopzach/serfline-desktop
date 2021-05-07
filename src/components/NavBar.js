@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
-      width: "100%",
+      width: "90%",
     },
   },
   searchIcon: {
@@ -73,6 +73,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     left: "94%",
     color: "white",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
 }));
 
@@ -127,14 +130,14 @@ const NavBar = () => {
             onClick={(event) => event.stopPropagation()}
           >
             <Paper elevation={0}>
-              {/* <IconButton
+              <IconButton
                 onClick={handleClose}
                 className={classes.closeButton}
                 color="primary"
                 size="medium"
               >
                 <CloseIcon />
-              </IconButton> */}
+              </IconButton>
               {open && <SurflineSearch closeBackdrop={handleClose} />}
             </Paper>
           </Container>
