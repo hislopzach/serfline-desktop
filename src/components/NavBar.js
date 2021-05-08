@@ -119,11 +119,11 @@ const NavBar = () => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <Link to="/articles" className={classes.link}>
+          {/* <Link to="/articles" className={classes.link}>
             <Typography variant="h6" className={classes.button}>
               Articles
             </Typography>
-          </Link>
+          </Link> */}
         </Toolbar>
         <MyBackdrop
           open={open}

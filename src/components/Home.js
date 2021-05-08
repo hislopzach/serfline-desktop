@@ -36,14 +36,14 @@ const Home = () => {
     // <Paper>
     <Container maxWidth="lg" className={classes.mainPaper}>
       <Grid container spacing={3} direction="column">
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography variant="h5">
               New Feature: Articles! Use the Articles page to view full length
               articles
             </Typography>
           </Paper>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography variant="h2">Cam of the Moment:</Typography>
