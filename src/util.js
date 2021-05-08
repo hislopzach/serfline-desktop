@@ -44,3 +44,32 @@ export const conditionToColor = (condition) => {
       return colors.blueLight;
   }
 };
+
+const getInnerJson = (scriptTagContents) => {
+  const startIndex = scriptTagContents.indexOf("{");
+  const toParse = scriptTagContents.slice(startIndex);
+  const json = JSON.parse(toParse);
+  return json;
+};
+
+export const getHtmlForArticle = (html) => {
+  let domParser = new DOMParser();
+  let doc = domParser.parseFromString(html, "text/html");
+  let scriptTage = Array.from(doc.querySelectorAll("script"));
+  let targetTag = scriptTage.filter(
+    (tag) => tag.innerText.indexOf("window.__DATA__") > -1
+  )[0];
+  let data = getInnerJson(targetTag.innerText);
+  console.log(data);
+  return data.editorial.article.content.body;
+};
+export const getArticleData = (html) => {
+  let domParser = new DOMParser();
+  let doc = domParser.parseFromString(html, "text/html");
+  let scriptTage = Array.from(doc.querySelectorAll("script"));
+  let targetTag = scriptTage.filter(
+    (tag) => tag.innerText.indexOf("window.__DATA__") > -1
+  )[0];
+  let data = getInnerJson(targetTag.innerText);
+  return data;
+};

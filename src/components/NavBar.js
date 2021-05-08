@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginRight: theme.spacing(2),
     marginLeft: theme.spacing(2),
-    width: "100%",
+    width: "90%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "90%",
@@ -105,6 +105,7 @@ const NavBar = () => {
               Serfline
             </Typography>
           </Link>
+
           <div className={classes.search} onClick={handleToggle}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -118,6 +119,11 @@ const NavBar = () => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
+          <Link to="/articles" className={classes.link}>
+            <Typography variant="h6" className={classes.button}>
+              Articles
+            </Typography>
+          </Link>
         </Toolbar>
         <MyBackdrop
           open={open}

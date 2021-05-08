@@ -8,6 +8,8 @@ import Home from "./Home";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import StreamViewer from "./StreamViewer";
+import Article from "./Article";
+import Articles from "./Articles";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -37,6 +39,12 @@ const App = () => {
           <Switch>
             <Route path="/spot/:spotId" component={Spot} />
             <Route path="/stream/" component={StreamViewer} />
+            <Route path="/articles/">
+              <Articles />
+            </Route>
+            <Route path="/article/">
+              <Article />
+            </Route>
             <Route path="/" component={Home} />
           </Switch>
         </Router>
