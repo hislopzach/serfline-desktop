@@ -48,6 +48,9 @@ const Article = () => {
     proxyApi.get(article)
   );
   const articleData = articlePage ? getArticleData(articlePage) : {};
+  if (status === "success") {
+    document.title = `${articleData.editorial.article.content.title} | Serfline`;
+  }
   return (
     <Container className={classes.container} maxWidth="lg">
       <link

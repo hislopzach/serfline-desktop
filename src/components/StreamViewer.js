@@ -1,5 +1,5 @@
 import { Grid, Paper } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactPlayer from "react-player/file";
 import { useLocation } from "react-router";
 const StreamViewer = (props) => {
@@ -19,6 +19,9 @@ const StreamViewer = (props) => {
 
     return params;
   };
+  useEffect(() => {
+    document.title = `Stream Viewer | Serfline`;
+  }, []);
   const { streamUrl } = parseQueryString(searchParams);
   return (
     <>

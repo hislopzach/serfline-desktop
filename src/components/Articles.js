@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +27,10 @@ const Articles = () => {
   const classes = useStyles();
   const history = useHistory();
   const [articleUrl, setArticleUrl] = useState("");
+  useEffect(() => {
+    document.title = `Articles | Serfline`;
+  }, []);
+
   const viewArticleClick = () => history.push("/article?article=" + articleUrl);
   return (
     <Container className={classes.container}>
