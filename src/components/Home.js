@@ -33,7 +33,15 @@ const Home = () => {
     <Container maxWidth="lg" className={classes.mainPaper}>
       <Grid container spacing={3} direction="column">
         <Grid item xs={12}>
-          <Paper elevation={1} className={classes.paper}>
+          <Paper className={classes.paper}>
+            <Typography variant="h5">
+              New Feature: Articles! Use the Articles page to view full length
+              articles
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
             <Typography variant="h2">Cam of the Moment:</Typography>
             <Typography variant="h3">
               {response?.data?.data?.spot?.name}
@@ -53,13 +61,6 @@ const Home = () => {
                 )}
               </Grid>
             </Grid>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper elevation={0} className={classes.paper}>
-            <Typography variant="h5">
-              Recently visited spots coming soon
-            </Typography>
           </Paper>
         </Grid>
       </Grid>
