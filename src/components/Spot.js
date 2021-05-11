@@ -36,6 +36,8 @@ const apiWrapper = (key, spotId, days) => {
       return SurflineAPI.getOverview(spotId);
     case "conditions":
       return SurflineAPI.getConditions(spotId);
+    case "nearbySpots":
+      return SurflineAPI.getNearbySpots(spotId);
     default:
       console.log("unknown key");
   }
@@ -51,11 +53,11 @@ const Spot = (props) => {
   const { data: swells } = useQuery(["swells", spotId, days], apiWrapper);
   const { data: winds } = useQuery(["winds", spotId, days], apiWrapper);
   const { data: tides } = useQuery(["tides", spotId, days], apiWrapper);
+  const { data: nearbySpots } = useQuery(["nearbySpots", spotId], apiWrapper);
   const { data: overview } = useQuery(
     report && ["overview", report.data.spot.subregion._id],
     apiWrapper
   );
-
   const handleDaysChange = (event) => {
     setDays(event.target.value);
   };
@@ -72,9 +74,10 @@ const Spot = (props) => {
     <Paper>
       <Grid container align="center">
         <Grid item xs={12} className={classes.mainPaper}>
-          {overview ? (
+          {overview && nearbySpots ? (
             <Report
               reportData={report.data}
+              nearbyData={nearbySpots.data}
               overview={overview.data}
               days={days}
             />
@@ -82,6 +85,7 @@ const Spot = (props) => {
             <ChartPlaceholder />
           )}
         </Grid>
+
         <Grid item xs={12}>
           <InputLabel id="days-label">Days to Show</InputLabel>
           <Select

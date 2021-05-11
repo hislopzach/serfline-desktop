@@ -30,6 +30,12 @@ const getArticle = async (url) => {
   const { data } = await axios.get(url);
   return data;
 };
+const getNearbySpots = async (spotId) => {
+  const { data } = await axios.get(
+    `${surflineUrl}/kbyg/spots/nearby?spotId=${spotId}`
+  );
+  return data;
+};
 // const getWeathers = (spotId) =>
 //   client.get(`${surflineUrl}/weather?spotId=${spotId}&days=1&intervalHours=12`);
 
@@ -43,4 +49,5 @@ export default {
   getConditions,
   getFeaturedCam,
   getArticle,
+  getNearbySpots,
 };
