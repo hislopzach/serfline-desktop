@@ -39,6 +39,8 @@ export const SwellChart = ({ surflineResponse, syncId, days, ...props }) => {
           <Tooltip
             cursor={{ fill: "rgba(206, 206, 206, 0.2)" }}
             content={SwellTooltip}
+            position={{ y: 0 }}
+            allowEscapeViewBox={{ x: false, y: false }}
           />
           <Line
             dataKey="swells[0].height"
@@ -53,6 +55,21 @@ export const SwellChart = ({ surflineResponse, syncId, days, ...props }) => {
           <Line
             dataKey="swells[2].height"
             stroke={colors.pink}
+            strokeWidth={5}
+          />
+          <Line
+            dataKey="swells[3].height"
+            stroke={colors.orange}
+            strokeWidth={5}
+          />
+          <Line
+            dataKey="swells[4].height"
+            stroke={colors.blueLight}
+            strokeWidth={5}
+          />
+          <Line
+            dataKey="swells[5].height"
+            stroke={colors.purple}
             strokeWidth={5}
           />
         </ComposedChart>

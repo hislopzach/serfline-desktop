@@ -19,6 +19,7 @@ const styles = {
 const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
+const formatTooltip = (value, name, props) => value.toFixed(1);
 
 export const TideChart = ({ surflineResponse, days, ...props }) => {
   const numToTruncate = days >= 5 ? days + 1 : days;
@@ -36,7 +37,7 @@ export const TideChart = ({ surflineResponse, days, ...props }) => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="humanTime" />
           <YAxis />
-          <Tooltip />
+          <Tooltip formatter={formatTooltip} />
           <Area dataKey="height" fill="#8884d8" barSize={30} />
         </AreaChart>
       </ResponsiveContainer>

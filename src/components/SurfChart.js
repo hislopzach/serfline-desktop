@@ -20,6 +20,10 @@ const styles = {
 const formatTime = (timestamp) => {
   return format(fromUnixTime(timestamp), "EEEEEE MM/dd h aaaa");
 };
+const formatTooltip = (value, name, props) => [
+  value.toFixed(1),
+  name.charAt(5).toUpperCase() + name?.slice(6),
+];
 
 export const SurfChart = ({ surflineResponse, syncId, days, ...props }) => {
   const data = surflineResponse.data.wave
@@ -36,9 +40,19 @@ export const SurfChart = ({ surflineResponse, syncId, days, ...props }) => {
           <XAxis dataKey="humanTime" xAxisId={0} />
           <XAxis dataKey="humanTime" xAxisId={1} hide />
           <YAxis />
-          <Tooltip />
-          <Bar dataKey="surf.max" xAxisId={0} fill={colors.purple} />
-          <Bar dataKey="surf.min" xAxisId={1} fill={colors.green} />
+          <Tooltip formatter={formatTooltip} />
+          <Bar
+            dataKey="surf.max"
+            xAxisId={0}
+            fill={colors.purple}
+            unit={surflineResponse.associated.units.waveHeight.toLowerCase()}
+          />
+          <Bar
+            dataKey="surf.min"
+            xAxisId={1}
+            fill={colors.green}
+            unit={surflineResponse.associated.units.waveHeight.toLowerCase()}
+          />
         </ComposedChart>
       </ResponsiveContainer>
     </div>

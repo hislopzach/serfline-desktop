@@ -14,28 +14,34 @@ const SwellTooltip = ({ payload, active, ...props }) => {
     borderRadius: "15px",
     paddingLeft: "10px",
     paddingRight: "10px",
+    paddingTop: "10px",
+    paddingBottom: "10px",
   };
   return (
     <div>
       <div className="custom-tooltip">
-        <p style={{ textAlign: "center" }}>
+        <span style={{ textAlign: "center" }}>
           <strong>{props.label}</strong>
-        </p>
+        </span>
         {payload
           .slice()
           .sort(compareSwells)
           .map((item, i) => {
             const { height, direction, period } =
               item.payload.swells[item.dataKey[7]];
-            return (
-              <div key={i} style={tooltip}>
-                <p style={{ color: item.color }}>
-                  {`${height.toPrecision(2)} ft @ ${Math.trunc(
-                    direction
-                  )}° ${degToCompass(direction)} ${period}s`}
-                </p>
-              </div>
-            );
+            if (height > 0) {
+              return (
+                <div key={i} style={tooltip}>
+                  <span style={{ color: item.color }}>
+                    {`${height.toFixed(1)} ft @ ${Math.trunc(
+                      direction
+                    )}° ${degToCompass(direction)} ${period}s`}
+                  </span>
+                </div>
+              );
+            } else {
+              return null;
+            }
           })}
       </div>
     </div>
