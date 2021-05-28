@@ -166,6 +166,9 @@ const Report = ({ reportData, nearbyData, overview, ...props }) => {
                       <Chip
                         color="primary"
                         label={s.name}
+                        icon={
+                          s.cameras?.length && <VideocamIcon fontSize="small" />
+                        }
                         className={classes.chip}
                         to={`/spot/${s._id}`}
                         component={Link}
