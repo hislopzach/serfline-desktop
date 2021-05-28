@@ -25,15 +25,14 @@ const SwellTooltip = ({ payload, active, ...props }) => {
           .slice()
           .sort(compareSwells)
           .map((item, i) => {
-            const { height, direction, period } = item.payload.swells[
-              item.dataKey[7]
-            ];
+            const { height, direction, period } =
+              item.payload.swells[item.dataKey[7]];
             return (
               <div key={i} style={tooltip}>
                 <p style={{ color: item.color }}>
-                  {`${height} ft @ ${Math.trunc(direction)}° ${degToCompass(
+                  {`${height.toPrecision(2)} ft @ ${Math.trunc(
                     direction
-                  )} ${period}s`}
+                  )}° ${degToCompass(direction)} ${period}s`}
                 </p>
               </div>
             );
