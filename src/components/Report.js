@@ -130,7 +130,9 @@ const Report = ({ reportData, nearbyData, overview, ...props }) => {
                     component={Link}
                     to={{
                       pathname: "/stream",
-                      search: `?streamUrl=${cam.rewindClip}`,
+                      search: `?streamUrl=${getLatestRewind(
+                        cam.rewindBaseUrl
+                      )}`,
                     }}
                   >
                     <ListItemIcon>

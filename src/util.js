@@ -1,3 +1,5 @@
+import { sub } from "date-fns";
+import { format } from "date-fns/esm";
 import colors from "./colors";
 
 export const degToCompass = (deg) => {
@@ -72,4 +74,21 @@ export const getArticleData = (html) => {
   )[0];
   let data = getInnerJson(targetTag.innerText);
   return data;
+};
+
+export const getLatestRewind = (rewindBaseUrl) => {
+  const targetDate = dateForRewind();
+  return `${rewindBaseUrl}.${targetDate}.mp4`;
+};
+
+const dateForRewind = () => {
+  // get current time
+  const now = new Date();
+  // subtract 15 mins
+  let targetDate = sub(now, {
+    minutes: 15,
+  });
+  // put into surfline format
+  const formatted = format(targetDate, "HHmm.y-MM-dd");
+  return formatted;
 };
