@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { degToCompass } from "../util";
+import { degToCompass, getLatestRewind } from "../util";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -88,13 +88,14 @@ const Report = ({ reportData, nearbyData, overview, ...props }) => {
         <div dangerouslySetInnerHTML={{ __html: report?.body }}></div>
       </Grid>
       <Grid item xs={10} container justify="center" alignItems="center">
-        <Grid item xs={12} md={4} justify="center">
+        <Grid item xs={12} md={4}>
           <strong>Cam Links:</strong>
           <div>
             <List component="nav">
               {spot.cameras?.length ? (
                 spot.cameras?.map((cam, ndx) => (
                   <ListItem
+                    key={ndx}
                     button
                     component={Link}
                     disabled={cam.status.isDown}
@@ -119,13 +120,14 @@ const Report = ({ reportData, nearbyData, overview, ...props }) => {
             </List>
           </div>
         </Grid>
-        <Grid item xs={12} md={4} justify="center">
+        <Grid item xs={12} md={4}>
           <strong>Rewind Links:</strong>
           <div>
             <List component="nav">
               {spot.cameras?.length ? (
                 spot.cameras?.map((cam, ndx) => (
                   <ListItem
+                    key={ndx}
                     button
                     component={Link}
                     to={{
@@ -169,7 +171,9 @@ const Report = ({ reportData, nearbyData, overview, ...props }) => {
                         color="primary"
                         label={s.name}
                         icon={
-                          s.cameras?.length && <VideocamIcon fontSize="small" />
+                          s.cameras?.length ? (
+                            <VideocamIcon fontSize="small" />
+                          ) : null
                         }
                         className={classes.chip}
                         to={`/spot/${s._id}`}
