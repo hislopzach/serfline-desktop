@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
+import LaunchIcon from "@material-ui/icons/Launch";
 import { makeStyles } from "@material-ui/core/styles";
 import ChartPlaceholder from "./ChartPlaceholder";
 import ReactPlayer from "react-player";
 import { useQuery } from "react-query";
 import surflineAPI from "../surflineAPI";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -49,6 +51,9 @@ const Home = () => {
             <Typography variant="h2">Cam of the Moment:</Typography>
             <Typography variant="h3">
               {response?.data?.data?.spot?.name}
+              <Link to={`/spot/${response?.data?.data?.spot?._id}`}>
+                <LaunchIcon color="primary" />
+              </Link>
             </Typography>
             <Grid container justify="center">
               <Grid item xs="auto">
