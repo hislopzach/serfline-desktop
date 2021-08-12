@@ -48,6 +48,14 @@ const Home = () => {
         </Grid> */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
+            <Typography variant="h5">
+              MESSAGE: Access to surfline has been recently restricted. I'm
+              making progress on a workaround that should be available soon
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
             <Typography variant="h2">Cam of the Moment:</Typography>
             <Typography variant="h3">
               {response?.data?.data?.spot?.name}
