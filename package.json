@@ -1,6 +1,6 @@
 {
-  "name": "linehacker",
-  "version": "0.1.0",
+  "name": "linehacker-electron",
+  "version": "0.1.1",
   "private": true,
   "author": "Hach Zislop",
   "homepage": "./",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hislopzach/linehacker"
+    "url": "git@github.com:hislopzach/linehacker-electron.git"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -50,7 +50,7 @@
     "preelectron-package": "npm run build"
   },
   "build": {
-    "appId": "linehacker",
+    "appId": "linehacker-electron",
     "files": [
       "build/**/*",
       "node_modules/**/*",
