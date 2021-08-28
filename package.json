@@ -4,10 +4,14 @@
   "private": true,
   "author": "Hach Zislop",
   "homepage": "./",
-  "main": "public/start-electron.js",
+  "main": "public/electron.js",
   "devDependencies": {
     "electron-builder": "^22.11.7",
     "electron": "^13.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hislopzach/linehacker"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -39,8 +43,10 @@
     "test": "react-scripts test",
     "deploy": "npm run build && firebase deploy",
     "eject": "react-scripts eject",
+    "el-build": "electron-builder build --mac --win --publish never",
+    "el-deploy": "electron-builder build --mac --win --publish always",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-package": "./node_modules/.bin/electron-builder -c.extraMetadata.main=build/start-electron.js",
+    "electron-package": "./node_modules/.bin/electron-builder -c.extraMetadata.main=build/electron.js",
     "preelectron-package": "npm run build"
   },
   "build": {
