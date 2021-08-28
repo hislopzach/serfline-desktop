@@ -13,10 +13,14 @@ import {
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
-
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from "react-router-dom";
 import SurflineSearch from "../SurflineSearch";
 import useKeyPress from "../hooks/useKeyPress";
+import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -95,6 +99,8 @@ const NavBar = () => {
   const handleToggle = () => {
     setOpen(!open);
   };
+  const history = useHistory();
+
   useKeyPress("Escape", handleClose);
   return (
     <>
@@ -103,6 +109,11 @@ const NavBar = () => {
           <Link to="/" className={classes.link}>
             <Typography variant="h5" className={classes.button}>
               Serfline
+            </Typography>
+          </Link>
+          <Link to="/articles" className={classes.link} style={{marginLeft:"1em"}}>
+            <Typography variant="h6" className={classes.button}>
+              Articles
             </Typography>
           </Link>
 
@@ -119,11 +130,8 @@ const NavBar = () => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          {/* <Link to="/articles" className={classes.link}>
-            <Typography variant="h6" className={classes.button}>
-              Articles
-            </Typography>
-          </Link> */}
+        <Button onClick={history.goBack}><ArrowBackIosIcon/></Button>
+        <Button onClick={history.goForward}><ArrowForwardIosIcon/></Button>
         </Toolbar>
         <MyBackdrop
           open={open}
