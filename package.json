@@ -1,6 +1,6 @@
 {
-  "name": "linehacker-electron",
-  "version": "0.1.2",
+  "name": "serfline-desktop",
+  "version": "1.0.0",
   "private": true,
   "author": "Hach Zislop",
   "homepage": "./",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:hislopzach/linehacker-electron.git"
+    "url": "git@github.com:hislopzach/serfline-desktop.git"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -44,13 +44,13 @@
     "deploy": "npm run build && firebase deploy",
     "eject": "react-scripts eject",
     "el-build": "electron-builder build --mac --publish never",
-    "el-deploy": "electron-builder build --mac --publish always",
+    "el-deploy": "electron-builder build --mac --win --publish always",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-package": "./node_modules/.bin/electron-builder -c.extraMetadata.main=build/electron.js",
-    "preelectron-package": "npm run build"
+    "preel-build": "npm run build",
+    "preel-deploy": "npm run build"
   },
   "build": {
-    "appId": "linehacker-electron",
+    "appId": "serfline-desktop",
     "files": [
       "build/**/*",
       "node_modules/**/*",
