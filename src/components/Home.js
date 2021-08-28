@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "3em",
     padding: 10,
   },
+  link: {
+    textDecoration: "none",
+  },
   text: {
     textAlign: "center",
   },
@@ -38,19 +41,11 @@ const Home = () => {
     // <Paper>
     <Container maxWidth="lg" className={classes.mainPaper}>
       <Grid container spacing={3} direction="column">
-        {/* <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Typography variant="h5">
-              New Feature: Articles! Use the Articles page to view full length
-              articles
-            </Typography>
-          </Paper>
-        </Grid> */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography variant="h5">
-              MESSAGE: Access to surfline has been recently restricted. I'm
-              making progress on a workaround that should be available soon
+              New Feature: Articles! Use the <Link to="/articles" className={classes.link}>Articles</Link> page to view full length
+              articles
             </Typography>
           </Paper>
         </Grid>
