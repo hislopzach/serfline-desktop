@@ -25,3 +25,4 @@ yarn-error.log*
 .firebase/hosting.YnVpbGQ.cache
 .vscode/tasks.json
 electron-builder.yml
+.env
