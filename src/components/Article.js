@@ -10,7 +10,7 @@ import { useQuery } from "react-query";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import proxyApi from "../proxyAPI";
-import { getArticleData } from "../util";
+import { getArticleFromHTML } from "../util";
 import "./EditorialArticleBody.scss";
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,12 +44,13 @@ const Article = () => {
     return params;
   };
   const { article } = parseQueryString(searchParams);
-  const { data: articlePage, status } = useQuery(["article", article], () =>
+  const { data: articleHTML, status } = useQuery(["article", article], () =>
     proxyApi.get(article)
   );
-  const articleData = articlePage ? getArticleData(articlePage) : {};
+  const articleData = articleHTML ? getArticleFromHTML(articleHTML) : {};
+
   if (status === "success") {
-    document.title = `${articleData.editorial.article.content.title} | Serfline`;
+    document.title = `${articleData.title} | Serfline`;
   }
   return (
     <Container className={classes.container} maxWidth="lg">
@@ -69,13 +70,13 @@ const Article = () => {
             <>
               <div className={classes.title}>
                 <Typography variant="h3">
-                  {articleData.editorial.article.content.title}
+                  {articleData.title}
                 </Typography>
               </div>
               <div
                 className="sl-editorial-article-body"
                 dangerouslySetInnerHTML={{
-                  __html: articleData.editorial.article.content.body,
+                  __html: articleData.body,
                 }}
               ></div>
             </>

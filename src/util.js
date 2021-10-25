@@ -68,13 +68,31 @@ export const getHtmlForArticle = (html) => {
 export const getArticleData = (html) => {
   let domParser = new DOMParser();
   let doc = domParser.parseFromString(html, "text/html");
-  let scriptTage = Array.from(doc.querySelectorAll("script"));
-  let targetTag = scriptTage.filter(
+  let scriptTag = Array.from(doc.querySelectorAll("script"));
+  let targetTag = scriptTag.find(
     (tag) => tag.innerText.indexOf("window.__DATA__") > -1
-  )[0];
+  );
   let data = getInnerJson(targetTag.innerText);
   return data;
 };
+
+export const getArticleContent = (articleData) => {
+  if (articleData?.editorial?.success) {
+    console.log("Editorial article");
+    return articleData.editorial.article.content
+  }
+  if (articleData?.forecast?.activeArticle) {
+    console.log("Forecast article");
+    return articleData.forecast.activeArticle.article.content
+  }
+}
+
+export const getArticleFromHTML = (html) => {
+  const data = getArticleData(html);
+  const content = getArticleContent(data);
+  return content;
+}
+
 
 export const getLatestRewind = (rewindBaseUrl) => {
   const targetDate = dateForRewind();
